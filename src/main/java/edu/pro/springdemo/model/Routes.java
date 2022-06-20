@@ -1,14 +1,9 @@
-package edu.pro.springdemo.model;/*
-  @author   makse
-  @project   spring-demo
-  @class  Item
-  @version  1.0.0 
-  @since 15.06.2022 - 22.48
-*/
+package edu.pro.springdemo.model;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.geo.Distance;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
@@ -17,27 +12,33 @@ import java.util.Objects;
 @ApiModel
 @Document
 
-public class Item {
+public class Routes {
     @Id
     @ApiModelProperty(value = " UUID is given by BD", required = true, dataType = "UUID to string", example = "12345")
     private String id;
     private String name;
-    private String description;
+    private String distance;
+    private String daysinway;
+    private String payment;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    public Item() {
+    public Routes() {
     }
 
-    public Item(String name, String description) {
+    public Routes(String name, String distance, String daysinway, String payment) {
         this.name = name;
-        this.description = description;
+        this.distance = distance;
+        this.daysinway = daysinway;
+        this.payment = payment;
     }
 
-    public Item(String id, String name, String description, LocalDateTime createdAt, LocalDateTime updatedAt) {
+    public Routes(String id, String name, String distance, String daysinway, String payment, LocalDateTime createdAt, LocalDateTime updatedAt) {
         this.id = id;
         this.name = name;
-        this.description = description;
+        this.distance = distance;
+        this.daysinway = daysinway;
+        this.payment = payment;
         this.createdAt = createdAt;
         this.updatedAt = updatedAt;
     }
@@ -58,12 +59,28 @@ public class Item {
         this.name = name;
     }
 
-    public String getDescription() {
-        return description;
+    public String getDistance() {
+        return distance;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setDistance(String distance) {
+        this.distance = distance;
+    }
+
+    public String getDaysinway() {
+        return daysinway;
+    }
+
+    public void setDaysinway(String daysinway) {
+        this.daysinway = daysinway;
+    }
+
+    public String getPayment() {
+        return payment;
+    }
+
+    public void setPayment(String payment) {
+        this.payment = payment;
     }
 
     public LocalDateTime getCreatedAt() {
@@ -86,23 +103,13 @@ public class Item {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Item item = (Item) o;
-        return getId().equals(item.getId());
+        Routes routes = (Routes) o;
+        return getId().equals(routes.getId());
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(getId());
     }
-
-    @Override
-    public String toString() {
-        return "Item{" +
-                "id='" + id + '\'' +
-                ", name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                ", createdAt=" + createdAt +
-                ", updatedAt=" + updatedAt +
-                '}';
-    }
 }
+
